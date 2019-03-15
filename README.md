@@ -8,6 +8,7 @@ This sample shows off how one can use Spring Cloud Config Server can externalize
 
 * Fork https://github.com/ramya-sks/spring-cloud-config-basics-repo into your own Git repo on GitHub
 * Edit to `config-server\src\main\resources\application.yml` to point to your fork from step 1
+* Start kafka locally
 * Run config-server application
 * Run `billboard` application
 * Run `greeter` application

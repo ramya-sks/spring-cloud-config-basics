@@ -6,8 +6,7 @@ This sample shows off how one can use Spring Cloud Config Server can externalize
 
 ### Run the Demo
 
-* Fork https://github.com/practical-microservices/spring-cloud-config-basics-repo.git into your own Git repo on GitHub
-* Import the root of the repo into your favorite Java IDE
+* Fork https://github.com/ramya-sks/spring-cloud-config-basics-repo into your own Git repo on GitHub
 * Edit to `config-server\src\main\resources\application.yml` to point to your fork from step 1
 * Run config-server application
 * Run `billboard` application
@@ -15,8 +14,14 @@ This sample shows off how one can use Spring Cloud Config Server can externalize
  
 
 ### Things to try out 
-* Access each application and check how the message is mapping to configuration value associated with every app. Examine the config repo to see how the mapping works. Notice that the name of the yml file matches the application name configured under `spring.application.name`
-* Change the Spring profile of billboard application to `dev` and see how the message is affected - the new values is coming out of configuration file `billboard-dev.yml`
+* http://localhost:8080/actuator/refresh will trigger a property refresh for the "greeter" service
+* http://localhost:8081/actuator/refresh will trigger a property refresh for the "billboard" service
+* http://localhost:8888/monitor endpoint on the config-server will trigger a property refresh for "greeter" or "billboard" service
+```
+curl -X POST localhost:8888/monitor -H "X-Github-Event: push" -H "Content-Type: application/json" -d '{"commits": [{"modified": ["greeter.yml"] }]}'
+
+curl -X POST localhost:8888/monitor -H "X-Github-Event: push" -H "Content-Type: application/json" -d '{"commits": [{"modified": ["billboard.yml"] }]}'
+```
 * Access the `/health` endpoint of each app. Notice how the configuration defined in `application.yml` applies to both applications.
 
  

@@ -3,10 +3,12 @@ server:
   port: 8888
 
 # Point the config server at the git repo containing the configuration settings
+
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/practical-microservices/spring-cloud-config-basics-repo.git
-
+          uri: https://github.com/ramya-sks/spring-cloud-config-basics-repo.git
